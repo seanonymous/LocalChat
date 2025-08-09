@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0ff" />
+
+    <!-- iOS PWA meta -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Neon Terminal" />
+
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <!-- Note: For best iOS icon fidelity, replace SVG with PNGs in /icons and update links -->
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/icon.svg" />
+
+    <title>Neon Terminal · Ollama</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app" class="app-root">
+      <header class="app-header">
+        <div class="brand">
+          <span class="brand-logo">▞▚</span>
+          <span class="brand-title">Neon Terminal</span>
+        </div>
+        <div class="actions">
+          <button id="btn-new" title="New chat" class="ghost">New</button>
+          <button id="btn-settings" title="Settings" class="ghost">Settings</button>
+        </div>
+      </header>
+
+      <main id="chat" class="chat">
+        <!-- Messages rendered here -->
+      </main>
+
+      <footer class="composer">
+        <div class="input-wrap">
+          <textarea id="input" rows="1" placeholder="Type a message…" autocomplete="off"></textarea>
+          <button id="btn-send" class="primary" title="Send">Send</button>
+        </div>
+        <div class="hint">Model: <span id="model-label"></span> · Server: <span id="server-label"></span></div>
+      </footer>
+    </div>
+
+    <!-- Settings Drawer -->
+    <div id="settings" class="settings hidden" role="dialog" aria-modal="true">
+      <div class="settings-panel">
+        <div class="settings-header">
+          <h2>Settings</h2>
+          <button id="btn-close-settings" class="ghost" title="Close">✕</button>
+        </div>
+        <div class="settings-body">
+          <label>
+            <span>Ollama Server URL</span>
+            <input id="server-url" type="text" placeholder="http://192.168.50.50:11434" />
+          </label>
+          <label>
+            <span>Model</span>
+            <input id="model" type="text" placeholder="llama3.1" />
+          </label>
+          <label class="inline">
+            <input id="save-history" type="checkbox" />
+            <span>Persist chats on this device</span>
+          </label>
+          <div class="settings-row">
+            <button id="btn-refresh-models" class="ghost">Discover Models</button>
+            <select id="models-list" class="hidden"></select>
+          </div>
+        </div>
+        <div class="settings-footer">
+          <button id="btn-save-settings" class="primary">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <script src="./app.js" type="module"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./service-worker.js').catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>

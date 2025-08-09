@@ -1,0 +1,12 @@
+{
+  "name": "Neon Terminal · Ollama",
+  "short_name": "NeonTerminal",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#0a0d10",
+  "theme_color": "#00f0ff",
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

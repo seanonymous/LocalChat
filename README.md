@@ -1,0 +1,2 @@
+# LocalChat
+Simple Chatbot UI

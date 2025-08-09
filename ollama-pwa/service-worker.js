@@ -1,11 +1,12 @@
 const CACHE = 'neon-terminal-v1';
+// Use relative URLs so this works when hosted under a subpath (e.g., /ollama-pwa/)
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/app.js',
-  '/manifest.webmanifest',
-  '/icons/icon.svg',
+  './',
+  './index.html',
+  './styles.css',
+  './app.js',
+  './manifest.webmanifest',
+  './icons/icon.svg',
 ];
 
 self.addEventListener('install', (event) => {
@@ -31,7 +32,7 @@ self.addEventListener('fetch', (event) => {
           const copy = res.clone();
           caches.open(CACHE).then((cache) => cache.put(event.request, copy));
           return res;
-        }).catch(() => caches.match('/index.html'));
+        }).catch(() => caches.match('./index.html'));
       })
     );
   }
